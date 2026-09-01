@@ -1,173 +1,193 @@
 'use client';
+import toast from 'react-hot-toast';
 import css from './FilterForm.module.css';
 
-import { Field, Form, Formik, FormikHelpers, useFormikContext } from 'formik';
+import { Field, Form, Formik } from 'formik';
+import { FiltersData } from '@/types/filters';
+import { useFiltersStore } from '@/lib/store/filtersStore';
 
 interface FilterFormValues {
-  location: string;
-  forms: string;
-  engines: string;
-  transmissions: string;
+  location: string | null;
+  forms: 'alcove' | 'panel_van' | 'integrated' | 'semi_integrated' | null;
+  transmissions: 'automatic' | 'manual' | null;
+  engines: 'diesel' | 'petrol' | 'hybrid' | 'electric' | null;
 }
 
-const initialValues = {
-  location: '',
-  forms: '',
-  engines: '',
-  transmissions: '',
-};
 export default function FilterForm() {
-  // const formikContext = useFormikContext<FilterFormValues>();
+  const filtersData = useFiltersStore(state => state.filters);
+  const setFilters = useFiltersStore(state => state.setFilters);
+  const clearFilters = useFiltersStore(state => state.clearFilters);
 
-  function handleSubmit(
-    values: FilterFormValues,
-    actions: FormikHelpers<FilterFormValues>
-  ) {
+  const initialValues = {
+    location: '',
+    forms: null,
+    engines: null,
+    transmissions: null,
+  };
+
+  // const initialValues = {
+  //   location: filtersData.location,
+  //   forms: filtersData.form,
+  //   engines: filtersData.engine,
+  //   transmissions: filtersData.transmission,
+  // };
+
+  function handleSubmit(values: FilterFormValues) {
     const formData = {
       location: values.location,
       form: values.forms,
       transmission: values.transmissions,
       engine: values.engines,
     };
-    console.log(formData);
-  }
-  function handleClear(actions: FormikHelpers<FilterFormValues>) {
-    actions.resetForm();
+    toast('Filters added');
+    setFilters(formData);
+    // console.log('formData:');
+    // console.log(formData);
+    // console.log('FiltersData:');
+    // console.log(filtersData);
   }
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-      <Form className={css.form}>
-        <label className={css.locationLabel}>
-          Location
-          <Field
-            className={css.locationInput}
-            type="text"
-            name="location"
-            placeholder="City"
-          />
-          <svg className={css.iconMap} width={20} height={20}>
-            <use href="/sprite.svg#icon-map" aria-hidden="true"></use>
-          </svg>
-        </label>
-        <div className={css.filtersWrapper}>
-          <h2 className={css.filtersHeading}>Filters</h2>
-          <fieldset className={css.fieldset}>
-            <legend className={css.legend}>Camper form</legend>
-            <label className={css.label}>
+      {({ resetForm }) => {
+        return (
+          <Form className={css.form}>
+            <label className={css.locationLabel}>
+              Location
               <Field
-                className={css.radio}
-                type="radio"
-                name="forms"
-                value="alcove"
+                className={css.locationInput}
+                type="text"
+                name="location"
+                placeholder="City"
               />
-              Alcove
+              <svg className={css.iconMap} width={16} height={16}>
+                <use href="/sprite.svg#icon-map" aria-hidden="true"></use>
+              </svg>
             </label>
-            <label className={css.label}>
-              <Field
-                className={css.radio}
-                type="radio"
-                name="forms"
-                value="panel_van"
-              />
-              Panel Van
-            </label>
-            <label className={css.label}>
-              <Field
-                className={css.radio}
-                type="radio"
-                name="forms"
-                value="integrated"
-              />
-              Integrated
-            </label>
-            <label className={css.label}>
-              <Field
-                className={css.radio}
-                type="radio"
-                name="forms"
-                value="semi_integrated"
-              />
-              Semi Integrated
-            </label>
-          </fieldset>
+            <div className={css.filtersWrapper}>
+              <h2 className={css.filtersHeading}>Filters</h2>
+              <fieldset className={css.fieldset}>
+                <legend className={css.legend}>Camper form</legend>
+                <label className={css.label}>
+                  <Field
+                    className={css.radio}
+                    type="radio"
+                    name="forms"
+                    value="alcove"
+                  />
+                  Alcove
+                </label>
+                <label className={css.label}>
+                  <Field
+                    className={css.radio}
+                    type="radio"
+                    name="forms"
+                    value="panel_van"
+                  />
+                  Panel Van
+                </label>
+                <label className={css.label}>
+                  <Field
+                    className={css.radio}
+                    type="radio"
+                    name="forms"
+                    value="integrated"
+                  />
+                  Integrated
+                </label>
+                <label className={css.label}>
+                  <Field
+                    className={css.radio}
+                    type="radio"
+                    name="forms"
+                    value="semi_integrated"
+                  />
+                  Semi Integrated
+                </label>
+              </fieldset>
 
-          <fieldset className={css.fieldset}>
-            <legend className={css.legend}>Engine</legend>
-            <label className={css.label}>
-              <Field
-                className={css.radio}
-                type="radio"
-                name="engines"
-                value="diesel"
-              />
-              Diesel
-            </label>
-            <label className={css.label}>
-              <Field
-                className={css.radio}
-                type="radio"
-                name="engines"
-                value="petrol"
-              />
-              Petrol
-            </label>
-            <label className={css.label}>
-              <Field
-                className={css.radio}
-                type="radio"
-                name="engines"
-                value="hybrid"
-              />
-              Hybrid
-            </label>
-            <label className={css.label}>
-              <Field
-                className={css.radio}
-                type="radio"
-                name="engines"
-                value="electric"
-              />
-              Electric
-            </label>
-          </fieldset>
-          <fieldset className={css.fieldset}>
-            <legend className={css.legend}>Transmission</legend>
-            <label className={css.label}>
-              <Field
-                className={css.radio}
-                type="radio"
-                name="transmissions"
-                value="automatic"
-              />
-              Automatic
-            </label>
-            <label className={css.label}>
-              <Field
-                className={css.radio}
-                type="radio"
-                name="transmissions"
-                value="manual"
-              />
-              Manual
-            </label>
-          </fieldset>
-        </div>
-        <div className={css.buttonsWrapper}>
-          <button className={css.submitButton} type="submit">
-            Search
-          </button>
-          <button
-            className={css.clearButton}
-            onClick={() => handleClear}
-            type="button"
-          >
-            <svg className={css.iconClose} width={24} height={24}>
-              <use href="/sprite.svg#icon-close" aria-hidden="true"></use>
-            </svg>
-            Clear filters
-          </button>
-        </div>
-      </Form>
+              <fieldset className={css.fieldset}>
+                <legend className={css.legend}>Engine</legend>
+                <label className={css.label}>
+                  <Field
+                    className={css.radio}
+                    type="radio"
+                    name="engines"
+                    value="diesel"
+                  />
+                  Diesel
+                </label>
+                <label className={css.label}>
+                  <Field
+                    className={css.radio}
+                    type="radio"
+                    name="engines"
+                    value="petrol"
+                  />
+                  Petrol
+                </label>
+                <label className={css.label}>
+                  <Field
+                    className={css.radio}
+                    type="radio"
+                    name="engines"
+                    value="hybrid"
+                  />
+                  Hybrid
+                </label>
+                <label className={css.label}>
+                  <Field
+                    className={css.radio}
+                    type="radio"
+                    name="engines"
+                    value="electric"
+                  />
+                  Electric
+                </label>
+              </fieldset>
+              <fieldset className={css.fieldset}>
+                <legend className={css.legend}>Transmission</legend>
+                <label className={css.label}>
+                  <Field
+                    className={css.radio}
+                    type="radio"
+                    name="transmissions"
+                    value="automatic"
+                  />
+                  Automatic
+                </label>
+                <label className={css.label}>
+                  <Field
+                    className={css.radio}
+                    type="radio"
+                    name="transmissions"
+                    value="manual"
+                  />
+                  Manual
+                </label>
+              </fieldset>
+            </div>
+            <div className={css.buttonsWrapper}>
+              <button className={css.submitButton} type="submit">
+                Search
+              </button>
+              <button
+                className={css.clearButton}
+                onClick={() => {
+                  resetForm();
+                  clearFilters();
+                  toast('Filters canceled');
+                }}
+                type="button"
+              >
+                <svg className={css.iconClose} width={24} height={24}>
+                  <use href="/sprite.svg#icon-close" aria-hidden="true"></use>
+                </svg>
+                Clear filters
+              </button>
+            </div>
+          </Form>
+        );
+      }}
     </Formik>
   );
 }

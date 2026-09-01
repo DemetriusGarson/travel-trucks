@@ -1,5 +1,6 @@
 import FilterForm from '@/components/FilterForm/FilterForm';
 import css from './Catalog.module.css';
+import CampersList from '@/components/CampersList/CampersList';
 
 export default function Catalog() {
   return (
@@ -8,12 +9,7 @@ export default function Catalog() {
         <section className={css.section}>
           {/* <div className={css.sidebar}>Sidebar</div> */}
           <FilterForm />
-          <div className={css.catalogWrapper}>
-            <div className={css.catalogList}>CatalogList</div>
-            <button type="button" className={css.loadMoreButton}>
-              Load More
-            </button>
-          </div>
+          <CampersList />
         </section>
       </main>
     </div>

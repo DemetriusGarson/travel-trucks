@@ -10,7 +10,7 @@
 .section {
   display: flex;
   gap: 65px;
-  padding: 63px 48px 64px 52px;
+  padding: 48px 64px 52px 63px;
 }
 
 /* .sidebar {
@@ -24,29 +24,3 @@
 
 /* .catalogList {
 } */
-
-.loadMoreButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border: 1px solid #dadde1;
-  border-radius: 200px;
-  width: 145px;
-  height: 56px;
-
-  background-color: transparent;
-
-  font-family: var(--font-inter);
-  font-weight: 500;
-  font-size: 16px;
-
-  line-height: 24px;
-  letter-spacing: -0.01em;
-  color: #101828;
-}
-
-.loadMoreButton:hover,
-.loadMoreButton:focus {
-  border-color: #6d7b75;
-}
