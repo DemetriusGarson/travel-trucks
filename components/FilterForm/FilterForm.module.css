@@ -1,0 +1,168 @@
+.form {
+  border-radius: 20px;
+  padding: 24px;
+  width: 360px;
+  height: 840px;
+  background: #f7f7f7;
+}
+
+.locationLabel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  margin-bottom: 40px;
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #6c717b;
+}
+
+.locationInput {
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  padding-left: 48px;
+  width: 312px;
+  height: 56px;
+  background: #fff;
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #6c717b;
+}
+
+.locationInput:focus,
+.locationInput:hover,
+.locationInput:active {
+  color: #101828;
+}
+
+.locationInput:focus + .iconMap,
+.locationInput:hover + .iconMap,
+.locationInput:active + .iconMap {
+  fill: #101828;
+  stroke: #101828;
+}
+
+.iconMap {
+  position: absolute;
+  top: 50px;
+  left: 20px;
+  fill: #6c717b;
+  stroke: #6c717b;
+}
+
+.filtersWrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+  margin-bottom: 48px;
+}
+
+.filtersHeading {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #101828;
+}
+.fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+}
+
+.legend {
+  margin-bottom: 8px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #6c717b;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #101828;
+}
+
+.radio {
+  width: 24px;
+  height: 24px;
+  accent-color: #475467;
+}
+
+.buttonsWrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+.submitButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  border: none;
+  border-radius: 200px;
+  padding: 16px 60px;
+  width: 312px;
+  height: 56px;
+
+  background: #829b91;
+
+  font-family: var(--font-inter);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+
+.submitButton:hover,
+.submitButton:focus {
+  background-color: #6d7b75;
+}
+
+.clearButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  border: 1px solid #dadde1;
+  border-radius: 200px;
+  padding: 16px 32px;
+  width: 312px;
+  height: 56px;
+
+  background: #fff;
+
+  font-family: var(--font-inter);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  color: #101828;
+}
+
+.clearButton:hover,
+.clearButton:focus {
+  border-color: #6d7b75;
+}
+
+.iconClose {
+  fill: #000;
+  stroke: #000;
+}
