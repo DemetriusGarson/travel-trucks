@@ -8,7 +8,7 @@ interface FiltersStore {
 }
 
 export const useFiltersStore = create<FiltersStore>()(set => ({
-  filters: { location: null, form: null, transmission: null, engine: null },
+  filters: { location: '', form: null, transmission: null, engine: null },
   setFilters: (filters: FiltersData) => {
     set(() => ({
       filters,
@@ -16,7 +16,7 @@ export const useFiltersStore = create<FiltersStore>()(set => ({
   },
   clearFilters: () => {
     set(() => ({
-      filters: { location: null, form: null, transmission: null, engine: null },
+      filters: { location: '', form: null, transmission: null, engine: null },
     }));
   },
 }));

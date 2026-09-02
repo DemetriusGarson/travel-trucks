@@ -12,7 +12,7 @@ export default function CampersList() {
 
   const {
     data,
-    // fetchNextPage,
+    fetchNextPage,
     // hasNextPage,
     // isFetchingNextPage,
     // isLoading,
@@ -61,7 +61,7 @@ export default function CampersList() {
                   <div className={css.infoWrapper}>
                     <div className={css.textWrapper}>
                       <div className={css.titleWrapper}>
-                        <p className={css.camperTitle}>{camper.name}</p>
+                        <h3 className={css.camperTitle}>{camper.name}</h3>
                         <p className={css.camperPrice}>{`€${camper.price}`}</p>
                       </div>
                       <div className={css.detailsWrapper}>
@@ -84,19 +84,76 @@ export default function CampersList() {
                             ></use>
                           </svg>
                           <p className={css.camperLocation}>
-                            {camper.location}
+                            {camper.location.split(', ').reverse().join(', ')}
                           </p>
                         </div>
                       </div>
                     </div>
                     <p className={css.supportingText}>{camper.description}</p>
+                    <div className={css.badgesWrapper}>
+                      <div className={css.camperBadge}>
+                        <svg
+                          className={css.camperBadgeIcon}
+                          width={20}
+                          height={20}
+                        >
+                          <use
+                            href="/sprite.svg#icon-engine"
+                            aria-hidden="true"
+                          ></use>
+                        </svg>
+                        <p className={css.camperBadgeType}>
+                          {camper.engine[0].toUpperCase() +
+                            camper.engine.slice(1)}
+                        </p>
+                      </div>
+                      <div className={css.camperBadge}>
+                        <svg
+                          className={css.camperBadgeIcon}
+                          width={20}
+                          height={20}
+                        >
+                          <use
+                            href="/sprite.svg#icon-transmission"
+                            aria-hidden="true"
+                          ></use>
+                        </svg>
+                        <p className={css.camperBadgeType}>
+                          {camper.transmission[0].toUpperCase() +
+                            camper.transmission.slice(1)}
+                        </p>
+                      </div>
+                      <div className={css.camperBadge}>
+                        <svg
+                          className={css.camperBadgeIcon}
+                          width={20}
+                          height={20}
+                        >
+                          <use
+                            href="/sprite.svg#icon-form"
+                            aria-hidden="true"
+                          ></use>
+                        </svg>
+                        <p className={css.camperBadgeType}>
+                          {camper.form[0].toUpperCase() +
+                            camper.form.slice(1).replace('_', ' ')}
+                        </p>
+                      </div>
+                    </div>
+                    <button type="button" className={css.showMoreButton}>
+                      Show more
+                    </button>
                   </div>
                 </div>
               </li>
             );
           })}
         </ul>
-        <button type="button" className={css.loadMoreButton}>
+        <button
+          type="button"
+          className={css.loadMoreButton}
+          onClick={() => fetchNextPage()}
+        >
           Load More
         </button>
       </div>

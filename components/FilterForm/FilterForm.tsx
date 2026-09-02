@@ -3,8 +3,8 @@ import toast from 'react-hot-toast';
 import css from './FilterForm.module.css';
 
 import { Field, Form, Formik } from 'formik';
-import { FiltersData } from '@/types/filters';
 import { useFiltersStore } from '@/lib/store/filtersStore';
+import { FiltersData } from '@/types/filters';
 
 interface FilterFormValues {
   location: string | null;
@@ -19,21 +19,14 @@ export default function FilterForm() {
   const clearFilters = useFiltersStore(state => state.clearFilters);
 
   const initialValues = {
-    location: '',
-    forms: null,
-    engines: null,
-    transmissions: null,
+    location: filtersData.location,
+    forms: filtersData.form,
+    engines: filtersData.engine,
+    transmissions: filtersData.transmission,
   };
 
-  // const initialValues = {
-  //   location: filtersData.location,
-  //   forms: filtersData.form,
-  //   engines: filtersData.engine,
-  //   transmissions: filtersData.transmission,
-  // };
-
   function handleSubmit(values: FilterFormValues) {
-    const formData = {
+    const formData: FiltersData = {
       location: values.location,
       form: values.forms,
       transmission: values.transmissions,
@@ -46,9 +39,20 @@ export default function FilterForm() {
     // console.log('FiltersData:');
     // console.log(filtersData);
   }
+
+  function handleClear(values: FilterFormValues) {
+    const clearFiltersData: FiltersData = {
+      location: values.location,
+      form: null,
+      transmission: null,
+      engine: null,
+    };
+    setFilters(clearFiltersData);
+  }
+
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-      {({ resetForm }) => {
+      {({ values, setValues }) => {
         return (
           <Form className={css.form}>
             <label className={css.locationLabel}>
@@ -173,9 +177,14 @@ export default function FilterForm() {
               <button
                 className={css.clearButton}
                 onClick={() => {
-                  resetForm();
-                  clearFilters();
-                  toast('Filters canceled');
+                  setValues({
+                    ...values,
+                    forms: null,
+                    transmissions: null,
+                    engines: null,
+                  });
+                  handleClear(values);
+                  toast('Filters cleared');
                 }}
                 type="button"
               >
