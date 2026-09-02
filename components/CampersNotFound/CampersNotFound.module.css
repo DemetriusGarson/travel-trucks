@@ -1,0 +1,102 @@
+.containerCampersNotFound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 24px 24px 24px;
+  width: 888px;
+  height: 840px;
+  border-radius: 16px;
+  background: #f7f7f7;
+}
+
+.campersNotFoundImage {
+  margin-bottom: 21px;
+}
+
+.textWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 16px;
+  margin-bottom: 43px;
+}
+
+.textHeading {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  text-align: center;
+  color: #101828;
+}
+
+.textDescription {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: #101828;
+}
+
+.buttonWrapper {
+  display: flex;
+  column-gap: 16px;
+}
+
+.clearButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  border: 1px solid #dadde1;
+  border-radius: 200px;
+  padding: 16px 32px;
+  width: 192px;
+  height: 56px;
+
+  background: #fff;
+
+  font-family: var(--font-inter);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  color: #101828;
+}
+
+.clearButton:hover,
+.clearButton:focus {
+  border-color: #6d7b75;
+}
+
+.iconClose {
+  fill: #000;
+  stroke: #000;
+}
+
+.showAllButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  border: none;
+  border-radius: 200px;
+  /* padding: 16px 60px; */
+  width: 192px;
+  height: 56px;
+
+  background: #829b91;
+
+  font-family: var(--font-inter);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+
+.showAllButton:hover,
+.showAllButton:focus {
+  background-color: #6d7b75;
+}

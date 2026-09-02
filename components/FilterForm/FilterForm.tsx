@@ -16,7 +16,7 @@ interface FilterFormValues {
 export default function FilterForm() {
   const filtersData = useFiltersStore(state => state.filters);
   const setFilters = useFiltersStore(state => state.setFilters);
-  const clearFilters = useFiltersStore(state => state.clearFilters);
+  // const clearFilters = useFiltersStore(state => state.clearFilters);
 
   const initialValues = {
     location: filtersData.location,
@@ -32,8 +32,8 @@ export default function FilterForm() {
       transmission: values.transmissions,
       engine: values.engines,
     };
-    toast('Filters added');
     setFilters(formData);
+    toast('Filters added');
     // console.log('formData:');
     // console.log(formData);
     // console.log('FiltersData:');
@@ -48,10 +48,15 @@ export default function FilterForm() {
       engine: null,
     };
     setFilters(clearFiltersData);
+    toast('Filters cleared');
   }
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
+      enableReinitialize
+    >
       {({ values, setValues }) => {
         return (
           <Form className={css.form}>
@@ -184,7 +189,6 @@ export default function FilterForm() {
                     engines: null,
                   });
                   handleClear(values);
-                  toast('Filters cleared');
                 }}
                 type="button"
               >

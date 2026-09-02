@@ -1,0 +1,22 @@
+.loader {
+  --color-1: #f7f7f7;
+  --color-2: #6d7b75;
+  --size: 1px;
+
+  width: calc(72 * var(--size));
+  height: calc(72 * var(--size));
+  border: calc(5 * var(--size)) solid var(--color-1);
+  border-bottom-color: var(--color-2);
+  border-radius: 50%;
+  display: flex;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

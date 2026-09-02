@@ -1,9 +1,13 @@
 'use client';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { keepPreviousData, useInfiniteQuery } from '@tanstack/react-query';
 import css from './CampersList.module.css';
 import { getCampers } from '@/lib/api/api';
 import { useFiltersStore } from '@/lib/store/filtersStore';
 import Image from 'next/image';
+import CampersLoader from '../CampersLoader/CampersLoader';
+import Modal from '../Modal/Modal';
+import Loader from '../Loader/Loader';
+import CampersNotFound from '../CampersNotFound/CampersNotFound';
 
 export default function CampersList() {
   const filtersData = useFiltersStore(state => state.filters);
@@ -13,11 +17,12 @@ export default function CampersList() {
   const {
     data,
     fetchNextPage,
-    // hasNextPage,
-    // isFetchingNextPage,
+    hasNextPage,
+    isFetchingNextPage,
     // isLoading,
     // isError,
-    // isFetched,
+    isFetching,
+    isFetched,
   } = useInfiniteQuery({
     queryKey: ['campers', filtersData],
     queryFn: async ({ pageParam }) => {
@@ -28,11 +33,13 @@ export default function CampersList() {
       });
     },
     initialPageParam: 1,
+    placeholderData: keepPreviousData,
     getNextPageParam: lastResponse => {
       const nextPage = lastResponse.page + 1;
       return nextPage <= lastResponse.totalPages ? nextPage : undefined;
     },
     // enabled: isAuthenticated,
+
     select: data => {
       return {
         ...data,
@@ -42,10 +49,23 @@ export default function CampersList() {
   });
 
   const campers = data?.campers ?? [];
-  console.log(campers);
+
+  //   console.log(campers);
+
   return (
     <>
+      {isFetching && !isFetchingNextPage && (
+        <Modal>
+          <CampersLoader />
+        </Modal>
+      )}
+      {/* <Modal>
+        <CampersLoader />
+      </Modal> */}
+
       <div className={css.container}>
+        <CampersNotFound />
+
         <ul className={css.campersList}>
           {campers.map(camper => {
             return (
@@ -149,13 +169,20 @@ export default function CampersList() {
             );
           })}
         </ul>
-        <button
-          type="button"
-          className={css.loadMoreButton}
-          onClick={() => fetchNextPage()}
-        >
-          Load More
-        </button>
+        {isFetchingNextPage && (
+          <div className={css.loaderWrapper}>
+            <Loader />
+          </div>
+        )}
+        {hasNextPage && !isFetchingNextPage && (
+          <button
+            type="button"
+            className={css.loadMoreButton}
+            onClick={() => fetchNextPage()}
+          >
+            Load More
+          </button>
+        )}
       </div>
     </>
   );
