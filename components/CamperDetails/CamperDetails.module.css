@@ -1,0 +1,18 @@
+.camperDetailsContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 88px;
+}
+
+.infoSection {
+  display: flex;
+  column-gap: 24px;
+}
+
+.infoSectionImageWrapper {
+  display: flex;
+  width: 638px;
+}
+
+.reviewsSection {
+}

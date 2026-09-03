@@ -1,4 +1,4 @@
-import { Camper } from '@/types/camper';
+import { CamperById, CamperItem } from '@/types/camper';
 import { FiltersData } from '@/types/filters';
 import axios from 'axios';
 
@@ -17,7 +17,7 @@ interface GetCampersResponse {
   perPage: number;
   total: number;
   totalPages: number;
-  campers: Camper[];
+  campers: CamperItem[];
 }
 
 export async function getCampers({
@@ -32,5 +32,11 @@ export async function getCampers({
       perPage,
     },
   });
+  return data;
+}
+
+export async function getCamperById(camperId: string): Promise<CamperById> {
+  const { data } = await api.get<CamperById>(`/campers/${camperId}`);
+  // console.log(data);
   return data;
 }

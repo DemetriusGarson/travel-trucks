@@ -126,7 +126,12 @@
   color: #101828;
 }
 
-.showMoreButton {
+.camperIdLink {
+  display: flex;
+  width: 173px;
+}
+
+.showMoreLink {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -148,8 +153,8 @@
   color: #fff;
 }
 
-.showMoreButton:hover,
-.showMoreButton:focus {
+.showMoreLink:hover,
+.showMoreLink:focus {
   background-color: #6d7b75;
 }
 

@@ -7,7 +7,6 @@ export default function Catalog() {
     <div className={css.container}>
       <main className={css.main}>
         <section className={css.section}>
-          {/* <div className={css.sidebar}>Sidebar</div> */}
           <FilterForm />
           <CampersList />
         </section>

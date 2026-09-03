@@ -8,6 +8,8 @@ import CampersLoader from '../CampersLoader/CampersLoader';
 import Modal from '../Modal/Modal';
 import Loader from '../Loader/Loader';
 import CampersNotFound from '../CampersNotFound/CampersNotFound';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 export default function CampersList() {
   const filtersData = useFiltersStore(state => state.filters);
@@ -20,7 +22,7 @@ export default function CampersList() {
     hasNextPage,
     isFetchingNextPage,
     // isLoading,
-    // isError,
+    isError,
     isFetching,
     isFetched,
   } = useInfiniteQuery({
@@ -49,8 +51,12 @@ export default function CampersList() {
   });
 
   const campers = data?.campers ?? [];
+  const isCampers = campers.length > 0;
+  const router = useRouter();
 
-  //   console.log(campers);
+  // function handleShowMore(camperID: string) {
+  //   router.push('/');
+  // }
 
   return (
     <>
@@ -59,12 +65,9 @@ export default function CampersList() {
           <CampersLoader />
         </Modal>
       )}
-      {/* <Modal>
-        <CampersLoader />
-      </Modal> */}
 
       <div className={css.container}>
-        <CampersNotFound />
+        {!isFetching && !isCampers && !isError && <CampersNotFound />}
 
         <ul className={css.campersList}>
           {campers.map(camper => {
@@ -160,20 +163,28 @@ export default function CampersList() {
                         </p>
                       </div>
                     </div>
-                    <button type="button" className={css.showMoreButton}>
+
+                    <Link
+                      className={css.showMoreLink}
+                      href={`/catalog/${camper.id}`}
+                      // target="_blank"
+                      // rel="noopener noreferrer"
+                    >
                       Show more
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </li>
             );
           })}
         </ul>
+
         {isFetchingNextPage && (
           <div className={css.loaderWrapper}>
             <Loader />
           </div>
         )}
+
         {hasNextPage && !isFetchingNextPage && (
           <button
             type="button"
