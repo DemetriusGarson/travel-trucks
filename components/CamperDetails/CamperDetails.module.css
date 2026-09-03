@@ -14,5 +14,11 @@
   width: 638px;
 }
 
+.infoSectionTextWrapper {
+  display: flex;
+  /* flex-direction: column;
+  row-gap: 16px; */
+  width: 650px;
+}
 .reviewsSection {
 }

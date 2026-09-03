@@ -1,0 +1,80 @@
+.camperCardContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  width: 650px;
+  height: 680px;
+}
+
+.camperCardHeadingWrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+  width: 650px;
+  padding: 24px;
+  height: 304px;
+  border-radius: 16px;
+  background: #f7f7f7;
+}
+
+.camperCardHeadingTitleWrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+}
+
+.camperTitle {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  color: #101828;
+}
+
+.detailsContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+.detailsWrapper {
+  display: flex;
+  column-gap: 16px;
+}
+
+.reviewWrapper,
+.locationWrapper {
+  display: flex;
+  column-gap: 4px;
+  align-items: center;
+}
+
+.iconStar {
+  fill: #ffc531;
+}
+
+.camperRating,
+.camperLocation {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #101828;
+}
+
+.iconMap {
+  fill: #101828;
+}
+
+.camperPrice {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  color: #101828;
+}
+
+.camperDescription {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #475467;
+  overflow: auto;
+}

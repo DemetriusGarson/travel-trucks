@@ -4,7 +4,8 @@ import { useParams } from 'next/navigation';
 import css from './CamperDetails.module.css';
 import { useQuery } from '@tanstack/react-query';
 import { getCamperById } from '@/lib/api/api';
-import CamperSwiper from '../Swiper/CamperSwiper';
+import CamperSwiper from '../CamperSwiper/CamperSwiper';
+import CamperCard from '../CamperCard/CamperCard';
 
 export default function CamperDetails() {
   const { camperId } = useParams<{ camperId: string }>();
@@ -21,6 +22,9 @@ export default function CamperDetails() {
             <section className={css.infoSection}>
               <div className={css.infoSectionImageWrapper}>
                 <CamperSwiper gallery={camper.gallery} />
+              </div>
+              <div className={css.infoSectionTextWrapper}>
+                <CamperCard camper={camper} />
               </div>
             </section>
             <section className={css.reviewsSection}>
