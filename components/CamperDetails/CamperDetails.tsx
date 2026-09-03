@@ -20,7 +20,7 @@ export default function CamperDetails() {
           <div className={css.camperDetailsContainer}>
             <section className={css.infoSection}>
               <div className={css.infoSectionImageWrapper}>
-                <CamperSwiper />
+                <CamperSwiper gallery={camper.gallery} />
               </div>
             </section>
             <section className={css.reviewsSection}>

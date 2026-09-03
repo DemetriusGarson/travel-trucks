@@ -1,107 +1,71 @@
-import React, { useRef, useState } from 'react';
-// Import Swiper React components
+'use client';
+import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import type { Swiper as SwiperType } from 'swiper';
 
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 
-// import './styles.css';
-
 import css from './CamperSwiper.module.css';
 
-// import required modules
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
+import { CamperImageEntity } from '@/types/camper';
+import Image from 'next/image';
 
-export default function CamperSwiper() {
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+interface CamperSwiperProps {
+  gallery: CamperImageEntity[];
+}
+
+export default function CamperSwiper({ gallery }: CamperSwiperProps) {
+  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
 
   return (
-    <>
+    <div className={css.swipersWrapper}>
       <Swiper
-        // style={{
-        //   '--swiper-navigation-color': '#fff',
-        //   '--swiper-pagination-color': '#fff',
-        // }}
-        spaceBetween={10}
+        spaceBetween={0}
         navigation={true}
         thumbs={{ swiper: thumbsSwiper }}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="mySwiper2"
+        className={css.swiperTop}
       >
-        {/* <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/abstract-1.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/abstract-2.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/abstract-3.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/abstract-4.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/abstract-5.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/abstract-6.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/abstract-7.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/abstract-8.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/abstract-9.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/abstract-10.jpg" />
-        </SwiperSlide> */}
+        {gallery.map(image => {
+          return (
+            <SwiperSlide key={image.id}>
+              <Image
+                src={image.original}
+                alt={image.id}
+                width={638}
+                height={505}
+              />
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
+
       <Swiper
         onSwiper={setThumbsSwiper}
-        spaceBetween={10}
+        spaceBetween={0}
         slidesPerView={4}
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="mySwiper"
+        className={css.swiperBottom}
       >
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/abstract-1.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/abstract-2.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/abstract-3.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/abstract-4.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/abstract-5.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/abstract-6.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/abstract-7.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/abstract-8.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/abstract-9.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/abstract-10.jpg" />
-        </SwiperSlide>
+        {gallery.map(image => {
+          return (
+            <SwiperSlide key={image.id} className={css.mySwiperSlide}>
+              <Image
+                src={image.thumb}
+                alt={image.id}
+                width={136}
+                height={144}
+              />
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
-    </>
+    </div>
   );
 }
