@@ -1,5 +1,6 @@
 import { CamperById, CamperItem } from '@/types/camper';
 import { FiltersData } from '@/types/filters';
+import { Review } from '@/types/review';
 import axios from 'axios';
 
 const api = axios.create({
@@ -38,5 +39,12 @@ export async function getCampers({
 export async function getCamperById(camperId: string): Promise<CamperById> {
   const { data } = await api.get<CamperById>(`/campers/${camperId}`);
   // console.log(data);
+  return data;
+}
+
+export async function getCamperByIdReviews(
+  camperId: string
+): Promise<Review[]> {
+  const { data } = await api.get<Review[]>(`/campers/${camperId}/reviews`);
   return data;
 }

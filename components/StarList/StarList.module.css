@@ -1,0 +1,18 @@
+.iconStar {
+  fill: #dadde1;
+}
+
+.iconStarRated {
+  fill: #ffc531;
+}
+
+.starList {
+  display: flex;
+  column-gap: 4px;
+  height: 16px;
+}
+
+.starItem {
+  display: flex;
+  align-items: center;
+}

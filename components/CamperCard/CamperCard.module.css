@@ -78,3 +78,94 @@
   color: #475467;
   overflow: auto;
 }
+
+/* ! VehicleDetails*/
+
+.camperCardVehicleDetailsContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  width: 650px;
+  height: 360px;
+  padding: 24px;
+  border-radius: 16px;
+  background: #f7f7f7;
+}
+
+.featuresContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+.featuresTitle {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  color: #101828;
+}
+
+.detailsLine {
+  border-bottom: 1px solid #dadde1;
+  width: 602px;
+  height: 0;
+}
+
+/* .badgesContainer {
+ 
+} */
+
+.badgesList {
+  display: flex;
+  width: 602px;
+  height: 48px;
+  flex-wrap: wrap;
+  gap: 8px;
+  overflow: auto;
+}
+
+.badgesItem {
+  border-radius: 100px;
+  padding: 12px 18px;
+  height: 48px;
+
+  background: #f2f4f7;
+  mix-blend-mode: multiply;
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: #101828;
+}
+
+.infoList {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  width: 602px;
+}
+
+.infoItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 602px;
+  height: 24px;
+}
+
+.infoItemName {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: #101828;
+}
+
+.infoItemValue {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: #101828;
+}

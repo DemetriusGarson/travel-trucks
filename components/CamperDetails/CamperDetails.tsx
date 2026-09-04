@@ -13,7 +13,6 @@ export default function CamperDetails() {
     queryKey: ['camper', camperId],
     queryFn: () => getCamperById(camperId),
   });
-  console.log(camper);
   return (
     <>
       {camper && (
@@ -26,9 +25,6 @@ export default function CamperDetails() {
               <div className={css.infoSectionTextWrapper}>
                 <CamperCard camper={camper} />
               </div>
-            </section>
-            <section className={css.reviewsSection}>
-              camperDetailsReviewsSection
             </section>
           </div>
         </>

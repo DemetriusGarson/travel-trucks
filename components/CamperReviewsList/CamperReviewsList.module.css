@@ -1,0 +1,73 @@
+.reviewsListWrapper {
+  display: flex;
+  width: 623px;
+  height: 384px;
+  overflow: auto;
+}
+
+.reviewsList {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+
+.reviewItem {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+
+  width: 623px;
+  height: 180px;
+
+  border-radius: 16px;
+  padding: 16px;
+  background: #f7f7f7;
+}
+
+.personWrapper {
+  display: flex;
+  column-gap: 16px;
+}
+
+.avatarContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 60px;
+  width: 60px;
+  height: 60px;
+  background: #fff;
+}
+
+.avatarSymbol {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  color: #829b91;
+}
+
+.rateContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+}
+
+.reviewerName {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #101828;
+}
+
+.commentTextWrapper {
+  overflow: auto;
+}
+.commentText {
+  font-weight: 400;
+  font-size: 16px;
+
+  line-height: 24px;
+
+  color: #475467;
+}

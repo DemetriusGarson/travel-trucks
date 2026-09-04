@@ -8,7 +8,6 @@ import CampersLoader from '../CampersLoader/CampersLoader';
 import Modal from '../Modal/Modal';
 import Loader from '../Loader/Loader';
 import CampersNotFound from '../CampersNotFound/CampersNotFound';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 export default function CampersList() {
@@ -24,7 +23,7 @@ export default function CampersList() {
     // isLoading,
     isError,
     isFetching,
-    isFetched,
+    // isFetched,
   } = useInfiniteQuery({
     queryKey: ['campers', filtersData],
     queryFn: async ({ pageParam }) => {
@@ -52,7 +51,6 @@ export default function CampersList() {
 
   const campers = data?.campers ?? [];
   const isCampers = campers.length > 0;
-  const router = useRouter();
 
   // function handleShowMore(camperID: string) {
   //   router.push('/');
@@ -89,7 +87,7 @@ export default function CampersList() {
                       </div>
                       <div className={css.detailsWrapper}>
                         <div className={css.reviewWrapper}>
-                          <svg className={css.iconStar} width={20} height={20}>
+                          <svg className={css.iconStar} width={16} height={16}>
                             <use
                               href="/sprite.svg#icon-star"
                               aria-hidden="true"

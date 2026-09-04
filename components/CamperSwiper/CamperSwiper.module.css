@@ -27,7 +27,8 @@
 
 .swiperBottom :global(.swiper-wrapper) {
   display: flex;
-  gap: 32px;
+  /* gap: 32px; */
+  justify-content: space-between;
 }
 
 .swiperBottom :global(.swiper-slide) {
@@ -36,7 +37,13 @@
   height: 144px;
 }
 
+.swiperBottom :global(.swiper-slide-thumb-active) img {
+  border: 3px solid #829b91;
+  border-radius: 16px;
+}
+
 .swiperBottom img {
+  display: flex;
   border-radius: 16px;
   object-fit: cover;
 }

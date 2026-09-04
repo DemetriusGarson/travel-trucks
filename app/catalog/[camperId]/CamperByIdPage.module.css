@@ -6,6 +6,25 @@
 
 .pageWrapper {
   display: flex;
-  gap: 65px;
+  flex-direction: column;
+  row-gap: 88px;
   padding: 64px 64px 232px 64px;
+}
+
+.reviewWrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+
+.reviewHeading {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  color: #101828;
+}
+
+.reviewBlocksContainer {
+  display: flex;
+  column-gap: 48px;
 }
