@@ -1,0 +1,29 @@
+.bookingFormContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+  width: 641px;
+  padding: 44px;
+  border: 1px solid #dadde1;
+  border-radius: 16px;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+}
+
+.bookingFormHeading {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #101828;
+}
+
+.supportingText {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #6c717b;
+}

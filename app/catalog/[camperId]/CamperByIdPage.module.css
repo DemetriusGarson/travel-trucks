@@ -11,6 +11,10 @@
   padding: 64px 64px 232px 64px;
 }
 
+.pageHeading {
+  display: none;
+}
+
 .reviewWrapper {
   display: flex;
   flex-direction: column;
