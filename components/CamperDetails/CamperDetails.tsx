@@ -12,6 +12,7 @@ export default function CamperDetails() {
   const { data: camper } = useQuery({
     queryKey: ['camper', camperId],
     queryFn: () => getCamperById(camperId),
+    refetchOnMount: false,
   });
   return (
     <>

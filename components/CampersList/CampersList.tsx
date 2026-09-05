@@ -39,7 +39,7 @@ export default function CampersList() {
       const nextPage = lastResponse.page + 1;
       return nextPage <= lastResponse.totalPages ? nextPage : undefined;
     },
-    // enabled: isAuthenticated,
+    refetchOnMount: false,
 
     select: data => {
       return {

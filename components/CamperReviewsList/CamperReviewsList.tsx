@@ -9,8 +9,9 @@ import StarList from '../StarList/StarList';
 export default function CamperReviewList() {
   const { camperId } = useParams<{ camperId: string }>();
   const { data: reviews } = useQuery({
-    queryKey: ['reviews'],
+    queryKey: ['reviews', camperId],
     queryFn: () => getCamperByIdReviews(camperId),
+    refetchOnMount: false,
   });
 
   return (

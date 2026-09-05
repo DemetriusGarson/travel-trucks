@@ -24,7 +24,7 @@ interface GetCampersResponse {
 
 export async function getFilters(): Promise<Filters> {
   const { data } = await api.get<Filters>('campers/filters');
-  console.log(data);
+  // console.log(data);
   return data;
 }
 

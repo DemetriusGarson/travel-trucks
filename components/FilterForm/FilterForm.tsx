@@ -1,4 +1,5 @@
 'use client';
+
 import toast from 'react-hot-toast';
 import css from './FilterForm.module.css';
 
@@ -7,46 +8,42 @@ import { useFiltersStore } from '@/lib/store/filtersStore';
 import { FiltersData } from '@/types/filters';
 import { getFilters } from '@/lib/api/api';
 import { useQuery } from '@tanstack/react-query';
+import Loader from '../Loader/Loader';
 
 interface FilterFormValues {
   location: string | null;
-  forms: 'alcove' | 'panel_van' | 'integrated' | 'semi_integrated' | null;
-  transmissions: 'automatic' | 'manual' | null;
-  engines: 'diesel' | 'petrol' | 'hybrid' | 'electric' | null;
+  form: 'alcove' | 'panel_van' | 'integrated' | 'semi_integrated' | null;
+  transmission: 'automatic' | 'manual' | null;
+  engine: 'diesel' | 'petrol' | 'hybrid' | 'electric' | null;
 }
 
 export default function FilterForm() {
   const filtersData = useFiltersStore(state => state.filters);
   const setFilters = useFiltersStore(state => state.setFilters);
-  // const clearFilters = useFiltersStore(state => state.clearFilters);
-
-  const { data: filters } = useQuery({
+  const { data: filters, isLoading } = useQuery({
     queryKey: ['filters'],
     queryFn: getFilters,
+    refetchOnMount: false,
   });
 
-  console.log(filters);
-
   const initialValues = {
-    location: filtersData.location,
-    forms: filtersData.form,
-    engines: filtersData.engine,
-    transmissions: filtersData.transmission,
+    ...filtersData,
+    // location: filtersData.location,
+    // form: filtersData.form,
+    // engine: filtersData.engine,
+    // transmission: filtersData.transmission,
   };
 
   function handleSubmit(values: FilterFormValues) {
     const formData: FiltersData = {
-      location: values.location,
-      form: values.forms,
-      transmission: values.transmissions,
-      engine: values.engines,
+      ...values,
+      // location: values.location,
+      // form: values.form,
+      // transmission: values.transmission,
+      // engine: values.engine,
     };
     setFilters(formData);
     toast('Filters added');
-    // console.log('formData:');
-    // console.log(formData);
-    // console.log('FiltersData:');
-    // console.log(filtersData);
   }
 
   function handleClear(values: FilterFormValues) {
@@ -61,158 +58,122 @@ export default function FilterForm() {
   }
 
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={handleSubmit}
-      enableReinitialize
-    >
-      {({ values, setValues }) => {
-        return (
-          <Form className={css.form}>
-            <label className={css.locationLabel}>
-              Location
-              <Field
-                className={css.locationInput}
-                type="text"
-                name="location"
-                placeholder="City"
-              />
-              <svg className={css.iconMap} width={16} height={16}>
-                <use href="/sprite.svg#icon-map" aria-hidden="true"></use>
-              </svg>
-            </label>
-            <div className={css.filtersWrapper}>
-              <h2 className={css.filtersHeading}>Filters</h2>
+    <>
+      {isLoading && (
+        <div className={css.loaderWrapper}>
+          <Loader />
+        </div>
+      )}
+      {filters && (
+        <Formik
+          initialValues={initialValues}
+          onSubmit={handleSubmit}
+          enableReinitialize
+        >
+          {({ values, setValues }) => {
+            return (
+              <Form className={css.form}>
+                <label className={css.locationLabel}>
+                  Location
+                  <Field
+                    className={css.locationInput}
+                    type="text"
+                    name="location"
+                    placeholder="City"
+                  />
+                  <svg className={css.iconMap} width={16} height={16}>
+                    <use href="/sprite.svg#icon-map" aria-hidden="true"></use>
+                  </svg>
+                </label>
 
-              <fieldset className={css.fieldset}>
-                <legend className={css.legend}>Camper form</legend>
+                <div className={css.filtersWrapper}>
+                  <h2 className={css.filtersHeading}>Filters</h2>
 
-                <label className={css.label}>
-                  <Field
-                    className={css.radio}
-                    type="radio"
-                    name="forms"
-                    value="alcove"
-                  />
-                  Alcove
-                </label>
-                <label className={css.label}>
-                  <Field
-                    className={css.radio}
-                    type="radio"
-                    name="forms"
-                    value="panel_van"
-                  />
-                  Panel Van
-                </label>
-                <label className={css.label}>
-                  <Field
-                    className={css.radio}
-                    type="radio"
-                    name="forms"
-                    value="integrated"
-                  />
-                  Integrated
-                </label>
-                <label className={css.label}>
-                  <Field
-                    className={css.radio}
-                    type="radio"
-                    name="forms"
-                    value="semi_integrated"
-                  />
-                  Semi Integrated
-                </label>
-              </fieldset>
+                  <fieldset className={css.fieldset}>
+                    <legend className={css.legend}>Camper form</legend>
+                    {filters.forms.map(form => (
+                      <label key={form} className={css.label}>
+                        <Field
+                          className={css.radio}
+                          type="radio"
+                          name="form"
+                          value={form}
+                        />
+                        {(form[0].toUpperCase() + form.slice(1)).replace(
+                          '_',
+                          ' '
+                        )}
+                      </label>
+                    ))}
+                  </fieldset>
 
-              {/* <fieldset className={css.fieldset}>
-                <legend className={css.legend}>Engine</legend>
-                <label className={css.label}>
-                  <Field
-                    className={css.radio}
-                    type="radio"
-                    name="engines"
-                    value="diesel"
-                  />
-                  Diesel
-                </label>
-                <label className={css.label}>
-                  <Field
-                    className={css.radio}
-                    type="radio"
-                    name="engines"
-                    value="petrol"
-                  />
-                  Petrol
-                </label>
-                <label className={css.label}>
-                  <Field
-                    className={css.radio}
-                    type="radio"
-                    name="engines"
-                    value="hybrid"
-                  />
-                  Hybrid
-                </label>
-                <label className={css.label}>
-                  <Field
-                    className={css.radio}
-                    type="radio"
-                    name="engines"
-                    value="electric"
-                  />
-                  Electric
-                </label>
-              </fieldset> */}
+                  <fieldset className={css.fieldset}>
+                    <legend className={css.legend}>Engine</legend>
+                    {filters.engines.map(engine => (
+                      <label key={engine} className={css.label}>
+                        <Field
+                          className={css.radio}
+                          type="radio"
+                          name="engine"
+                          value={engine}
+                        />
+                        {(engine[0].toUpperCase() + engine.slice(1)).replace(
+                          '_',
+                          ' '
+                        )}
+                      </label>
+                    ))}
+                  </fieldset>
 
-              {/* <fieldset className={css.fieldset}>
-                <legend className={css.legend}>Transmission</legend>
-                <label className={css.label}>
-                  <Field
-                    className={css.radio}
-                    type="radio"
-                    name="transmissions"
-                    value="automatic"
-                  />
-                  Automatic
-                </label>
-                <label className={css.label}>
-                  <Field
-                    className={css.radio}
-                    type="radio"
-                    name="transmissions"
-                    value="manual"
-                  />
-                  Manual
-                </label>
-              </fieldset> */}
-            </div>
-            <div className={css.buttonsWrapper}>
-              <button className={css.submitButton} type="submit">
-                Search
-              </button>
-              <button
-                className={css.clearButton}
-                onClick={() => {
-                  setValues({
-                    ...values,
-                    forms: null,
-                    transmissions: null,
-                    engines: null,
-                  });
-                  handleClear(values);
-                }}
-                type="button"
-              >
-                <svg className={css.iconClose} width={24} height={24}>
-                  <use href="/sprite.svg#icon-close" aria-hidden="true"></use>
-                </svg>
-                Clear filters
-              </button>
-            </div>
-          </Form>
-        );
-      }}
-    </Formik>
+                  <fieldset className={css.fieldset}>
+                    <legend className={css.legend}>Transmission</legend>
+                    {filters.transmissions.map(transmission => (
+                      <label key={transmission} className={css.label}>
+                        <Field
+                          className={css.radio}
+                          type="radio"
+                          name="transmission"
+                          value={transmission}
+                        />
+                        {(
+                          transmission[0].toUpperCase() + transmission.slice(1)
+                        ).replace('_', ' ')}
+                      </label>
+                    ))}
+                  </fieldset>
+                </div>
+
+                <div className={css.buttonsWrapper}>
+                  <button className={css.submitButton} type="submit">
+                    Search
+                  </button>
+                  <button
+                    className={css.clearButton}
+                    onClick={() => {
+                      setValues({
+                        ...values,
+                        form: null,
+                        transmission: null,
+                        engine: null,
+                      });
+                      handleClear(values);
+                    }}
+                    type="button"
+                  >
+                    <svg className={css.iconClose} width={24} height={24}>
+                      <use
+                        href="/sprite.svg#icon-close"
+                        aria-hidden="true"
+                      ></use>
+                    </svg>
+                    Clear filters
+                  </button>
+                </div>
+              </Form>
+            );
+          }}
+        </Formik>
+      )}
+    </>
   );
 }

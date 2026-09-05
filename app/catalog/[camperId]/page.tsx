@@ -3,6 +3,12 @@ import css from './CamperByIdPage.module.css';
 
 import CamperReviewList from '@/components/CamperReviewsList/CamperReviewsList';
 import BookingForm from '@/components/BookingForm/BookingForm';
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from '@tanstack/react-query';
+import { getCamperById, getCamperByIdReviews } from '@/lib/api/api';
 
 type CamperByIdPageProps = {
   params: Promise<{ camperId: string }>;
@@ -10,20 +16,34 @@ type CamperByIdPageProps = {
 
 export default async function CamperByIdPage({ params }: CamperByIdPageProps) {
   const { camperId } = await params;
-  console.log(camperId);
+
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ['camper', camperId],
+    queryFn: () => getCamperById(camperId),
+  });
+
+  await queryClient.prefetchQuery({
+    queryKey: ['reviews', camperId],
+    queryFn: () => getCamperByIdReviews(camperId),
+  });
+
   return (
     <div className={css.container}>
       <main className={css.main}>
         <div className={css.pageWrapper}>
           <h1 className={css.pageHeading}>Camper Details</h1>
-          <CamperDetails />
-          <div className={css.reviewWrapper}>
-            <h2 className={css.reviewHeading}>Reviews</h2>
-            <div className={css.reviewBlocksContainer}>
-              <CamperReviewList />
-              <BookingForm />
+          <HydrationBoundary state={dehydrate(queryClient)}>
+            <CamperDetails />
+            <div className={css.reviewWrapper}>
+              <h2 className={css.reviewHeading}>Reviews</h2>
+              <div className={css.reviewBlocksContainer}>
+                <CamperReviewList />
+                <BookingForm />
+              </div>
             </div>
-          </div>
+          </HydrationBoundary>
         </div>
       </main>
     </div>
