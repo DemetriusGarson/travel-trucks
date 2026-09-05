@@ -5,6 +5,8 @@ import css from './FilterForm.module.css';
 import { Field, Form, Formik } from 'formik';
 import { useFiltersStore } from '@/lib/store/filtersStore';
 import { FiltersData } from '@/types/filters';
+import { getFilters } from '@/lib/api/api';
+import { useQuery } from '@tanstack/react-query';
 
 interface FilterFormValues {
   location: string | null;
@@ -17,6 +19,13 @@ export default function FilterForm() {
   const filtersData = useFiltersStore(state => state.filters);
   const setFilters = useFiltersStore(state => state.setFilters);
   // const clearFilters = useFiltersStore(state => state.clearFilters);
+
+  const { data: filters } = useQuery({
+    queryKey: ['filters'],
+    queryFn: getFilters,
+  });
+
+  console.log(filters);
 
   const initialValues = {
     location: filtersData.location,
@@ -74,8 +83,10 @@ export default function FilterForm() {
             </label>
             <div className={css.filtersWrapper}>
               <h2 className={css.filtersHeading}>Filters</h2>
+
               <fieldset className={css.fieldset}>
                 <legend className={css.legend}>Camper form</legend>
+
                 <label className={css.label}>
                   <Field
                     className={css.radio}
@@ -114,7 +125,7 @@ export default function FilterForm() {
                 </label>
               </fieldset>
 
-              <fieldset className={css.fieldset}>
+              {/* <fieldset className={css.fieldset}>
                 <legend className={css.legend}>Engine</legend>
                 <label className={css.label}>
                   <Field
@@ -152,8 +163,9 @@ export default function FilterForm() {
                   />
                   Electric
                 </label>
-              </fieldset>
-              <fieldset className={css.fieldset}>
+              </fieldset> */}
+
+              {/* <fieldset className={css.fieldset}>
                 <legend className={css.legend}>Transmission</legend>
                 <label className={css.label}>
                   <Field
@@ -173,7 +185,7 @@ export default function FilterForm() {
                   />
                   Manual
                 </label>
-              </fieldset>
+              </fieldset> */}
             </div>
             <div className={css.buttonsWrapper}>
               <button className={css.submitButton} type="submit">

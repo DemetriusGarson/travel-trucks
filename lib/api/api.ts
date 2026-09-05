@@ -1,5 +1,5 @@
 import { CamperById, CamperItem } from '@/types/camper';
-import { FiltersData } from '@/types/filters';
+import { Filters, FiltersData } from '@/types/filters';
 import { Review } from '@/types/review';
 import { User } from '@/types/user';
 import axios from 'axios';
@@ -20,6 +20,12 @@ interface GetCampersResponse {
   total: number;
   totalPages: number;
   campers: CamperItem[];
+}
+
+export async function getFilters(): Promise<Filters> {
+  const { data } = await api.get<Filters>('campers/filters');
+  console.log(data);
+  return data;
 }
 
 export async function getCampers({
