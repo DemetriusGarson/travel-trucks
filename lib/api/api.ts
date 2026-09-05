@@ -1,6 +1,7 @@
 import { CamperById, CamperItem } from '@/types/camper';
 import { FiltersData } from '@/types/filters';
 import { Review } from '@/types/review';
+import { User } from '@/types/user';
 import axios from 'axios';
 
 const api = axios.create({
@@ -46,5 +47,26 @@ export async function getCamperByIdReviews(
   camperId: string
 ): Promise<Review[]> {
   const { data } = await api.get<Review[]>(`/campers/${camperId}/reviews`);
+  return data;
+}
+
+interface PostBookingProps {
+  camperId: string;
+  user: User;
+}
+
+interface PostBookingResponse {
+  message: string;
+}
+
+export async function postBooking({
+  camperId,
+  user,
+}: PostBookingProps): Promise<PostBookingResponse> {
+  const { data } = await api.post<PostBookingResponse>(
+    `/campers/${camperId}/booking-requests`,
+    user
+  );
+  // console.log(data);
   return data;
 }
