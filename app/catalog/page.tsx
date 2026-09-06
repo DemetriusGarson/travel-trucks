@@ -54,6 +54,7 @@ export default async function Catalog() {
   return (
     <div className={css.container}>
       <main className={css.main}>
+        <h1 className={css.pageHeading}>Campers Catalog</h1>
         <section className={css.section}>
           <HydrationBoundary state={dehydrate(queryClient)}>
             <FilterForm />

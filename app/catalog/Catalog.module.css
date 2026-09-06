@@ -5,17 +5,11 @@
   position: relative;
 }
 
-/* .main {
-} */
-
 .section {
   display: flex;
   gap: 65px;
   padding: 48px 64px 52px 63px;
 }
-
-/* .sidebar {
-} */
 
 .catalogWrapper {
   display: flex;
@@ -23,5 +17,6 @@
   row-gap: 40px;
 }
 
-/* .catalogList {
-} */
+.pageHeading {
+  display: none;
+}
