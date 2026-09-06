@@ -343,6 +343,6 @@ Future improvements could include:
 
 ## 👨‍💻 Author
 
- **Dmytro Havrysh**<br>
- LinkedIn: **[Dmytro Havrysh](https://www.linkedin.com/in/dmytro-havrysh-zp/?locale=en-US)**<br>
- GitHub: **[DemetriusGarson](https://github.com/DemetriusGarson)**
+**Dmytro Havrysh**<br>
+LinkedIn: **[Dmytro Havrysh](https://www.linkedin.com/in/dmytro-havrysh-zp/?locale=en-US)**<br>
+GitHub: **[DemetriusGarson](https://github.com/DemetriusGarson)**
