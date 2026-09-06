@@ -10,7 +10,7 @@ export default function Header() {
   return (
     <div className={css.container}>
       <header className={css.header}>
-        <Link href="/" className={css.logo}>
+        <Link href="/" className={css.logo} aria-label="Travel Trucks home">
           <svg className={css.iconLogo} width={136} height={16}>
             <use href="/sprite.svg#icon-logo" aria-hidden="true"></use>
           </svg>

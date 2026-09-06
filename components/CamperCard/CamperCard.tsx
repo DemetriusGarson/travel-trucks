@@ -39,7 +39,7 @@ export default function CamperCard({ camper }: CamperCardProps) {
   ];
 
   return (
-    <div className={css.camperCardContainer}>
+    <article className={css.camperCardContainer}>
       <div className={css.camperCardHeadingWrapper}>
         <div className={css.camperCardHeadingTitleWrapper}>
           <h3 className={css.camperTitle}>{camper.name}</h3>
@@ -96,6 +96,6 @@ export default function CamperCard({ camper }: CamperCardProps) {
           })}
         </ul>
       </div>
-    </div>
+    </article>
   );
 }

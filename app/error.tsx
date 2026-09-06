@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function Error({ error, reset }: Props) {
   return (
-    <div className={css.notFoundWrapper}>
+    <section className={css.notFoundWrapper}>
       <div className={css.textWrapper}>
         <h1>Some error</h1>
         <p>{error.message}</p>
@@ -26,6 +26,6 @@ export default function Error({ error, reset }: Props) {
           Try Again
         </button>
       </div>
-    </div>
+    </section>
   );
 }

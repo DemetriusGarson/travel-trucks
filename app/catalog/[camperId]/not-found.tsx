@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function NotFoundCamper() {
   return (
-    <div className={css.notFoundWrapper}>
+    <section className={css.notFoundWrapper}>
       <div className={css.textWrapper}>
         <h1>Camper not found</h1>
         <Link
@@ -24,6 +24,6 @@ export default function NotFoundCamper() {
           Catalog
         </Link>
       </div>
-    </div>
+    </section>
   );
 }
