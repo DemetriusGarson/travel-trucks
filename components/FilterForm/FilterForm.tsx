@@ -9,6 +9,7 @@ import { FiltersData } from '@/types/filters';
 import { getFilters } from '@/lib/api/api';
 import { useQuery } from '@tanstack/react-query';
 import Loader from '../Loader/Loader';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 interface FilterFormValues {
   location: string | null;
@@ -20,7 +21,11 @@ interface FilterFormValues {
 export default function FilterForm() {
   const filtersData = useFiltersStore(state => state.filters);
   const setFilters = useFiltersStore(state => state.setFilters);
-  const { data: filters, isLoading } = useQuery({
+  const {
+    data: filters,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ['filters'],
     queryFn: getFilters,
     refetchOnMount: false,
@@ -28,19 +33,11 @@ export default function FilterForm() {
 
   const initialValues = {
     ...filtersData,
-    // location: filtersData.location,
-    // form: filtersData.form,
-    // engine: filtersData.engine,
-    // transmission: filtersData.transmission,
   };
 
   function handleSubmit(values: FilterFormValues) {
     const formData: FiltersData = {
       ...values,
-      // location: values.location,
-      // form: values.form,
-      // transmission: values.transmission,
-      // engine: values.engine,
     };
     setFilters(formData);
     toast('Filters added');
@@ -59,6 +56,7 @@ export default function FilterForm() {
 
   return (
     <>
+      {isError && <ErrorMessage />}
       {isLoading && (
         <div className={css.loaderWrapper}>
           <Loader />

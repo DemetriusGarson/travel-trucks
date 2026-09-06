@@ -9,6 +9,8 @@ import {
   QueryClient,
 } from '@tanstack/react-query';
 import { getCamperById, getCamperByIdReviews } from '@/lib/api/api';
+import { notFound } from 'next/navigation';
+import axios from 'axios';
 
 type CamperByIdPageProps = {
   params: Promise<{ camperId: string }>;
@@ -19,15 +21,22 @@ export default async function CamperByIdPage({ params }: CamperByIdPageProps) {
 
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery({
-    queryKey: ['camper', camperId],
-    queryFn: () => getCamperById(camperId),
-  });
+  try {
+    await queryClient.fetchQuery({
+      queryKey: ['camper', camperId],
+      queryFn: () => getCamperById(camperId),
+    });
 
-  await queryClient.prefetchQuery({
-    queryKey: ['reviews', camperId],
-    queryFn: () => getCamperByIdReviews(camperId),
-  });
+    await queryClient.fetchQuery({
+      queryKey: ['reviews', camperId],
+      queryFn: () => getCamperByIdReviews(camperId),
+    });
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response?.status === 404) {
+      notFound();
+    }
+    throw error;
+  }
 
   return (
     <div className={css.container}>

@@ -9,11 +9,10 @@ import Modal from '../Modal/Modal';
 import Loader from '../Loader/Loader';
 import CampersNotFound from '../CampersNotFound/CampersNotFound';
 import Link from 'next/link';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 export default function CampersList() {
   const filtersData = useFiltersStore(state => state.filters);
-  //   console.log('CampersList filtersData:');
-  //   console.log(filtersData);
 
   const {
     data,
@@ -52,10 +51,6 @@ export default function CampersList() {
   const campers = data?.campers ?? [];
   const isCampers = campers.length > 0;
 
-  // function handleShowMore(camperID: string) {
-  //   router.push('/');
-  // }
-
   return (
     <>
       {isFetching && !isFetchingNextPage && (
@@ -65,6 +60,7 @@ export default function CampersList() {
       )}
 
       <div className={css.container}>
+        {isError && <ErrorMessage />}
         {!isFetching && !isCampers && !isError && <CampersNotFound />}
 
         <ul className={css.campersList}>
@@ -165,8 +161,8 @@ export default function CampersList() {
                     <Link
                       className={css.showMoreLink}
                       href={`/catalog/${camper.id}`}
-                      // target="_blank"
-                      // rel="noopener noreferrer"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
                       Show more
                     </Link>

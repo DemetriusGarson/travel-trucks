@@ -5,10 +5,16 @@ import css from './CamperReviewsList.module.css';
 import { useQuery } from '@tanstack/react-query';
 import { getCamperByIdReviews } from '@/lib/api/api';
 import StarList from '../StarList/StarList';
+import Loader from '../Loader/Loader';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 export default function CamperReviewList() {
   const { camperId } = useParams<{ camperId: string }>();
-  const { data: reviews } = useQuery({
+  const {
+    data: reviews,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ['reviews', camperId],
     queryFn: () => getCamperByIdReviews(camperId),
     refetchOnMount: false,
@@ -16,6 +22,12 @@ export default function CamperReviewList() {
 
   return (
     <div className={css.reviewsListWrapper}>
+      {isLoading && (
+        <div className={css.loaderWrapper}>
+          <Loader />
+        </div>
+      )}
+      {isError && <ErrorMessage />}
       {reviews && reviews.length > 0 && (
         <ul className={css.reviewsList}>
           {reviews.map(review => {

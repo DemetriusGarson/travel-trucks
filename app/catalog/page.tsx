@@ -18,21 +18,26 @@ export default async function Catalog() {
   };
 
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery({
-    queryKey: ['filters'],
-    queryFn: getFilters,
-  });
 
-  await queryClient.prefetchInfiniteQuery({
-    queryKey: ['campers', initialFilters],
-    queryFn: ({ pageParam }) =>
-      getCampers({
-        filters: initialFilters,
-        page: pageParam,
-        perPage: 4,
-      }),
-    initialPageParam: 1,
-  });
+  try {
+    await queryClient.fetchQuery({
+      queryKey: ['filters'],
+      queryFn: getFilters,
+    });
+
+    await queryClient.fetchInfiniteQuery({
+      queryKey: ['campers', initialFilters],
+      queryFn: ({ pageParam }) =>
+        getCampers({
+          filters: initialFilters,
+          page: pageParam,
+          perPage: 4,
+        }),
+      initialPageParam: 1,
+    });
+  } catch (error) {
+    throw error;
+  }
 
   return (
     <div className={css.container}>

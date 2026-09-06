@@ -22,7 +22,11 @@ export default function Home() {
               </p>
             </div>
 
-            <Link href="/catalog" className={css.heroButton}>
+            <Link
+              href="/catalog"
+              className={css.heroButton}
+              aria-label="Open catalog page"
+            >
               View Now
             </Link>
           </div>

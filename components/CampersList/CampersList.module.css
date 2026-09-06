@@ -183,3 +183,7 @@
 .loadMoreButton:focus {
   border-color: #6d7b75;
 }
+
+.loaderWrapper {
+  margin: 0 auto;
+}

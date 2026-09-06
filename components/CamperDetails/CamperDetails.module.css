@@ -16,3 +16,7 @@
   display: flex;
   width: 650px;
 }
+
+.loaderWrapper {
+  margin: 0 auto;
+}
