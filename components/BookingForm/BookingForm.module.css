@@ -140,3 +140,7 @@
 .visible {
   display: flex;
 }
+
+.loaderWrapper {
+  margin: 0 auto;
+}

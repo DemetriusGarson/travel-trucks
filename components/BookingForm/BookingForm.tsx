@@ -7,6 +7,7 @@ import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { postBooking } from '@/lib/api/api';
 import { useParams } from 'next/navigation';
+import Loader from '../Loader/Loader';
 
 interface BookingFormValues {
   name: string;
@@ -31,7 +32,7 @@ const BookingFormSchema = Yup.object().shape({
 export default function BookingForm() {
   const { camperId } = useParams<{ camperId: string }>();
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: postBooking,
 
     onSuccess: data => {
@@ -143,10 +144,15 @@ export default function BookingForm() {
                     />
                   </label>
                 </div>
-
-                <button className={css.submitButton} type="submit">
-                  Send
-                </button>
+                {isPending ? (
+                  <div className={css.loaderWrapper}>
+                    <Loader />
+                  </div>
+                ) : (
+                  <button className={css.submitButton} type="submit">
+                    Send
+                  </button>
+                )}
               </Form>
             );
           }}

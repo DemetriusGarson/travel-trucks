@@ -21,10 +21,20 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   title: 'Travel Trucks',
-  description: 'Travel Trucks app',
+  description: 'Travel Trucks for you',
+  openGraph: {
+    title: 'Travel Trucks',
+    description: 'Travel Trucks for you',
+    url: 'https://travel-trucks-delta-teal.vercel.app/',
+    type: 'article',
+  },
 };
 
-export default function RootLayout({ children }: LayoutProps<'/'>) {
+interface RootLayoutProps {
+  children: React.ReactNode;
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body className={`${inter.variable} ${manrope.variable}`}>

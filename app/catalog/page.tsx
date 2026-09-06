@@ -8,6 +8,18 @@ import {
   QueryClient,
 } from '@tanstack/react-query';
 import { FiltersData } from '@/types/filters';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Travel Trucks Catalog',
+  description: 'Choose your travel truck',
+  openGraph: {
+    title: 'Travel Trucks Catalog',
+    description: 'Choose your travel truck',
+    url: 'https://travel-trucks-delta-teal.vercel.app/catalog',
+    type: 'article',
+  },
+};
 
 export default async function Catalog() {
   const initialFilters: FiltersData = {

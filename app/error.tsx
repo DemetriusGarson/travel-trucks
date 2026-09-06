@@ -1,9 +1,19 @@
 'use client';
+import { Metadata } from 'next';
 import css from './Error.module.css';
 
 type Props = {
   error: Error;
   reset: () => void;
+};
+
+export const metadata: Metadata = {
+  title: 'Error',
+  description: 'Some Error',
+  openGraph: {
+    title: 'Error',
+    description: 'Some Error',
+  },
 };
 
 export default function Error({ error, reset }: Props) {

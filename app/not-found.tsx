@@ -1,5 +1,15 @@
 import Link from 'next/link';
 import css from './NotFound.module.css';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Page not found',
+  description: 'This page not found',
+  openGraph: {
+    title: 'Page not found',
+    description: 'This page not found',
+  },
+};
 
 export default function NotFound() {
   return (
